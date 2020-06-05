@@ -4,4 +4,8 @@ const getAllAnimals = function () {
 	return Animal.find();
 };
 
-module.exports = { getAllAnimals };
+const getAnimalById = function (id) {
+	return Animal.findById(id);
+};
+
+module.exports = { getAllAnimals, getAnimalById };

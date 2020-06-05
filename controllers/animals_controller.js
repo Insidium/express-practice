@@ -1,4 +1,4 @@
-const { getAllAnimals } = require('../utils/animals_utilities');
+const { getAllAnimals, getAnimalById } = require('../utils/animals_utilities');
 
 const getAnimals = function (req, res) {
 	getAllAnimals().exec((err, animals) => {
@@ -12,4 +12,14 @@ const getAnimals = function (req, res) {
 	});
 };
 
-module.exports = { getAnimals };
+const getAnimal = function (req, res) {
+	getAnimalById(req.params.id).exec((err, animal) => {
+		if (err) {
+			res.status(404);
+			return res.send('Animal not found');
+		}
+		res.send(animal);
+	});
+};
+
+module.exports = { getAnimals, getAnimal };
