@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const animalRouter = require('./routes/animals_routes');
 
 const port = process.env.port || 3008;
 
@@ -27,6 +28,8 @@ mongoose.connect(
 		}
 	}
 );
+
+app.use('/animals', animalRouter);
 
 app.listen(port, () =>
 	console.log(`Animal Shelter server is listening on port ${port}`)

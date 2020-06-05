@@ -18,3 +18,5 @@ const Animal = new Schema({
 		type: String,
 	},
 });
+
+module.exports = mongoose.model('Animal', Animal);
