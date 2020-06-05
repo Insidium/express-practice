@@ -1,4 +1,10 @@
-const { getAllAnimals, getAnimalById } = require('../utils/animals_utilities');
+const {
+	getAllAnimals,
+	getAnimalById,
+	addAnimal,
+	deleteAnimal,
+	updateAnimal,
+} = require('../utils/animals_utilities');
 
 const getAnimals = function (req, res) {
 	getAllAnimals().exec((err, animals) => {
@@ -22,4 +28,51 @@ const getAnimal = function (req, res) {
 	});
 };
 
-module.exports = { getAnimals, getAnimal };
+const postAnimal = function (req, res) {
+	//save animal instance from addAnimal
+	addAnimal(req.body).save((err, animal) => {
+		if (err) {
+			res.status(500);
+			return res.json({
+				error: err.message,
+			});
+		}
+		res.send(201);
+		res.send(animal);
+	});
+};
+
+const removeAnimal = function (req, res) {
+	//remove animal instance from animals
+	deleteAnimal(req.params.id).exec((err, animal) => {
+		if (err) {
+			res.status(500);
+			return res.json({
+				error: err.message,
+			});
+		}
+		res.send(204);
+	});
+};
+
+const changeAnimal = function (req, res) {
+	//update animal instance from animals
+	updateAnimal(req).exec((err, animal) => {
+		if (err) {
+			res.status(500);
+			return res.json({
+				error: err.message,
+			});
+		}
+		res.send(200);
+		res.send(animal);
+	});
+};
+
+module.exports = {
+	getAnimals,
+	getAnimal,
+	postAnimal,
+	removeAnimal,
+	changeAnimal,
+};
