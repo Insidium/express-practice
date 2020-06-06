@@ -24,7 +24,7 @@ mongoose.connect(
 		if (err) {
 			console.log('Error connecting database', err);
 		} else {
-			console.log('Connected to database!');
+			console.log('Connected to database');
 		}
 	}
 );
@@ -32,5 +32,5 @@ mongoose.connect(
 app.use('/animals', animalRouter);
 
 app.listen(port, () =>
-	console.log(`Animal Shelter server is listening on port ${port}`)
+	console.log(`Animal Shelter server is active on port ${port}`)
 );
